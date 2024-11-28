@@ -1,0 +1,224 @@
+package view;
+
+import model.Docente;
+import model.Discente;
+import service.DocenteService;
+import service.DiscenteService;
+import java.time.LocalDate;
+import java.util.*;
+
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        int choiceEntity;
+        System.out.println("1. Per gestire docenti");
+        System.out.println("2. Per gestire discenti");
+        choiceEntity = scanner.nextInt();
+
+        switch (choiceEntity){
+            case 1:
+                gestisciDocenti();
+                break;
+            case 2:
+                gestisciDiscenti();
+                break;
+
+        }
+
+    }
+    private static void gestisciDiscenti(){
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+
+            System.out.println("Classe discente");
+
+            System.out.println("***Menu***");
+            System.out.println("1. Crea un nuovo discente");
+            System.out.println("2. Aggiorna un discente");
+            System.out.println("3. Visualizza la lista di discenti");
+            System.out.println("4. Elimina un discente");
+            System.out.println("9. Exit");
+            System.out.print("inserisci la tua scelta: ");
+
+            // Read user input
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    createDiscente();
+                    break;
+                case 2:
+                    updateDiscente();
+                    break;
+                case 3:
+                    readDiscenti();
+                    break;
+                case 4:
+                    deleteDiscente();
+                    break;
+                case 9:
+                    System.out.println("exiting");
+                    break;
+                default:
+                    System.out.println("scelta errata. scegliere un numero da 1 a 8");
+            }
+
+        } while (choice != 9);
+        scanner.close();
+
+    }
+    private static void gestisciDocenti(){
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+
+            System.out.println("Classe docente");
+
+            System.out.println("***Menu***");
+            System.out.println("1. Crea un nuovo docente");
+            System.out.println("2. Aggiorna un docente");
+            System.out.println("3. Visualizza la lista di docenti");
+            System.out.println("4. Elimina un docente");
+            System.out.println("9. Exit");
+            System.out.print("inserisci la tua scelta: ");
+
+            // Read user input
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    create();
+                    break;
+                case 2:
+                    update();
+                    break;
+                case 3:
+                    read();
+                    break;
+                case 4:
+                    delete();
+                    break;
+                case 9:
+                    System.out.println("exiting");
+                    break;
+                default:
+                    System.out.println("scelta errata. scegliere un numero da 1 a 8");
+            }
+
+        } while (choice != 9);
+        scanner.close();
+
+    }
+
+    private static void read() {
+        System.out.println("ecco la lista dei docenti: ");
+        DocenteService oDocenteService = new DocenteService();
+        List<Docente> listaDocenti= oDocenteService.readDocente();
+        int i = 0;
+        while(i<listaDocenti.size()){
+            System.out.println(listaDocenti.get(i).getid()+" "+listaDocenti.get(i).getCognome()+" "+listaDocenti.get(i).getNome());
+            i++;}
+
+    }
+
+    private static void readDiscenti() {
+        System.out.println("ecco la lista dei discenti: ");
+        DiscenteService oDiscenteService = new DiscenteService();
+        List<Discente> listaDiscenti= oDiscenteService.readDiscente();
+        int i = 0;
+        while(i<listaDiscenti.size()){
+            System.out.println(listaDiscenti.get(i).getid()+" "+ listaDiscenti.get(i).getCognome()+" "+listaDiscenti.get(i).getNome());
+            i++;}
+
+    }
+
+
+        private static void create () {
+            System.out.println("inserisci nome: ");
+            Scanner scanner = new Scanner(System.in);
+            String nome = scanner.next();
+            System.out.println("inserisci cognome: ");
+            String cognome = scanner.next();
+            DocenteService oDocenteService = new DocenteService();
+            oDocenteService.create(nome, cognome);
+
+        }
+
+    private static void createDiscente () {
+        System.out.println("inserisci nome: ");
+        Scanner scanner = new Scanner(System.in);
+        String nome = scanner.next();
+        System.out.println("inserisci cognome: ");
+        String cognome = scanner.next();
+        System.out.println("Inserisci la matricola: ");
+        String matricola = scanner.next();
+        System.out.println("Inserisci il giorno di nascita: ");
+        int giorno = scanner.nextInt();
+        System.out.println("Inserisci il mese di nascita: ");
+        int mese = scanner.nextInt();
+        System.out.println("Inserisci l'anno di nascita: ");
+        int anno = scanner.nextInt();
+        LocalDate dataDiNascita = LocalDate.of(anno, mese, giorno);
+        DiscenteService oDiscenteService = new DiscenteService();
+        oDiscenteService.create(nome, cognome, matricola, dataDiNascita);
+
+    }
+
+        private static void delete () {
+            System.out.println("Elimina il docente con id: ");
+            Scanner scanner = new Scanner(System.in);
+            int id = scanner.nextInt();
+            DocenteService oDocenteService = new DocenteService();
+            oDocenteService.delete(id);
+
+        }
+
+    private static void deleteDiscente () {
+        System.out.println("Elimina il discente con id: ");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        DiscenteService oDiscenteService = new DiscenteService();
+        oDiscenteService.delete(id);
+
+    }
+
+        private static void update () {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("inserisci l'id del docente da modificare:");
+            int id = scanner.nextInt();
+            System.out.println("inserisci il nuovo nome:");
+            String nome = scanner.next();
+            System.out.println("inserisci il nuovo cognome:");
+            String cognome = scanner.next();
+            DocenteService oDocenteService = new DocenteService();
+            oDocenteService.update(id, nome, cognome);
+
+        }
+
+    private static void updateDiscente () {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("inserisci l'id del docente da modificare:");
+        int id = scanner.nextInt();
+        System.out.println("inserisci il nuovo nome:");
+        String nome = scanner.next();
+        System.out.println("inserisci il nuovo cognome:");
+        String cognome = scanner.next();
+        System.out.println("Inserisci la matricola: ");
+        String matricola = scanner.next();
+        System.out.println("Inserisci il nuovo giorno di nascita: ");
+        int giorno = scanner.nextInt();
+        System.out.println("Inserisci il nuovo mese di nascita: ");
+        int mese = scanner.nextInt();
+        System.out.println("Inserisci il nuovo anno di nascita: ");
+        int anno = scanner.nextInt();
+        LocalDate dataDiNascita = LocalDate.of(anno, mese, giorno);
+        DiscenteService oDiscenteService = new DiscenteService();
+        oDiscenteService.update(id, nome, cognome, matricola, dataDiNascita);
+
+    }
+
+}
