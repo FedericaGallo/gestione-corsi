@@ -18,7 +18,7 @@ public class Main {
         int choiceEntity;
         System.out.println("1. Per gestire docenti");
         System.out.println("2. Per gestire discenti");
-        System.out.println("2. Per gestire corsi");
+        System.out.println("3. Per gestire corsi");
         choiceEntity = scanner.nextInt();
 
         switch (choiceEntity){
