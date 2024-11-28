@@ -20,7 +20,27 @@ public class DocenteRepository {
         }
     }
 
+public Docente readDocenteByID(int id){
+    Docente oDocente = new Docente();
+        try {
+            Connection c = DbConnection.openConnection();
+            System.out.println("Connessione riuscita!");
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM DocenteTest WHERE id = " + id);
+            while (rs.next()) {
 
+                oDocente.setNome(rs.getString("nome"));
+                oDocente.setCognome(rs.getString("cognome"));
+                oDocente.setid(rs.getInt("id"));
+
+            }
+
+        }catch (ClassNotFoundException | SQLException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+        return oDocente;
+}
 
     public ArrayList<Docente> readDocente () {
             ArrayList<Docente> listaDocenti = new ArrayList<>();

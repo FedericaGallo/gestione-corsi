@@ -2,8 +2,10 @@ package view;
 
 import model.Docente;
 import model.Discente;
+import model.Corso;
 import service.DocenteService;
 import service.DiscenteService;
+import service.CorsoService;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -16,6 +18,7 @@ public class Main {
         int choiceEntity;
         System.out.println("1. Per gestire docenti");
         System.out.println("2. Per gestire discenti");
+        System.out.println("2. Per gestire corsi");
         choiceEntity = scanner.nextInt();
 
         switch (choiceEntity){
@@ -24,6 +27,9 @@ public class Main {
                 break;
             case 2:
                 gestisciDiscenti();
+                break;
+            case 3:
+                gestisciCorso();
                 break;
 
         }
@@ -114,6 +120,49 @@ public class Main {
 
     }
 
+    private static void gestisciCorso(){
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+
+            System.out.println("Classe corso");
+
+            System.out.println("***Menu***");
+            System.out.println("1. Crea un nuovo corso");
+            System.out.println("2. Aggiorna un corso");
+            System.out.println("3. Visualizza la lista dei corsi");
+            System.out.println("4. Elimina un corso");
+            System.out.println("9. Exit");
+            System.out.print("inserisci la tua scelta: ");
+
+            // Read user input
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    createCorso();
+                    break;
+                case 2:
+                    updateDiscente();
+                    break;
+                case 3:
+                    readDiscenti();
+                    break;
+                case 4:
+                    deleteDiscente();
+                    break;
+                case 9:
+                    System.out.println("exiting");
+                    break;
+                default:
+                    System.out.println("scelta errata. scegliere un numero da 1 a 8");
+            }
+
+        } while (choice != 9);
+        scanner.close();
+
+    }
+
     private static void read() {
         System.out.println("ecco la lista dei docenti: ");
         DocenteService oDocenteService = new DocenteService();
@@ -165,6 +214,27 @@ public class Main {
         LocalDate dataDiNascita = LocalDate.of(anno, mese, giorno);
         DiscenteService oDiscenteService = new DiscenteService();
         oDiscenteService.create(nome, cognome, matricola, dataDiNascita);
+
+    }
+
+    private static void createCorso () {
+        System.out.println("inserisci nome corso: ");
+        Scanner scanner = new Scanner(System.in);
+        String nomeCorso = scanner.next();
+        System.out.println("Inserisci il giorno di inizio: ");
+        int giorno = scanner.nextInt();
+        System.out.println("Inserisci il mese di inizio: ");
+        int mese = scanner.nextInt();
+        System.out.println("Inserisci l'anno di inizio: ");
+        int anno = scanner.nextInt();
+        read();
+        System.out.println("Inserisci l'id del docente: ");
+        int docenteId = scanner.nextInt();
+        System.out.println("Inserisci durata: ");
+        String durata = scanner.next();
+        LocalDate dataInizio = LocalDate.of(anno, mese, giorno);
+        CorsoService oCorsoService = new CorsoService();
+        oCorsoService.create(nomeCorso, durata, dataInizio, docenteId);
 
     }
 
