@@ -44,7 +44,7 @@ public class Main {
             System.out.println("4. Elimina un discente");
             System.out.println("9. Exit");
             System.out.print("inserisci la tua scelta: ");
-
+            System.out.print("test commit push");
             // Read user input
             choice = scanner.nextInt();
             switch (choice) {
