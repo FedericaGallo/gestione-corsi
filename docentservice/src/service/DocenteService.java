@@ -8,8 +8,6 @@ import java.util.List;
 public class DocenteService {
     DocenteRepository docenteRepository = new DocenteRepository();
 
-
-
     public void create(String nome, String cognome) {
         Docente oDocente = new Docente();
         oDocente.setCognome(cognome);

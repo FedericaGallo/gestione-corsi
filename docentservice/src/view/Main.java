@@ -6,6 +6,7 @@ import model.Corso;
 import service.DocenteService;
 import service.DiscenteService;
 import service.CorsoService;
+import service.CorsoDiscenteService;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -19,7 +20,7 @@ public class Main {
         System.out.println("1. Per gestire docenti");
         System.out.println("2. Per gestire discenti");
         System.out.println("3. Per gestire corsi");
-        System.out.println("4. Per gestire corsi_discenti ");
+        System.out.println("4. Per gestire gli iscritti a i corsi ");
         choiceEntity = scanner.nextInt();
 
         switch (choiceEntity){
@@ -187,18 +188,18 @@ public class Main {
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-                    createCorso();
+                    createCorsoDiscente();
                     break;
                 case 2:
+                    deleteCorsoDiscente();
 
-                    updateCorso();
 
                     break;
                 case 3:
-                    readCorsi();
+
                     break;
                 case 4:
-                    deleteCorso();
+
                     break;
                 case 9:
                     System.out.println("exiting");
@@ -242,6 +243,14 @@ public class Main {
             System.out.println(listaCorsi.get(i).getId()+" "+listaCorsi.get(i).getNomeCorso()+" "+ listaCorsi.get(i).getDataInizio()+" "+listaCorsi.get(i).getDurata()+" "+listaCorsi.get(i).getDocenteNome()+" "+listaCorsi.get(i).getDocenteCognome());
             i++;}
 
+    }
+
+    private static void readCorsiSeguiti(int id){
+        DiscenteService oDiscenteService = new DiscenteService();
+       HashMap<Integer, Corso> corsiSeguiti = oDiscenteService.readCorsiSeguiti(id);
+        for (Corso c : corsiSeguiti.values()) {
+            System.out.println(c.getId()+ " "+ c.getNomeCorso());
+        }
     }
 
     private static void create () {
@@ -296,6 +305,18 @@ public class Main {
 
     }
 
+    private static void createCorsoDiscente(){
+        readDiscenti();
+        System.out.println("inserisci id studente: ");
+        Scanner scanner = new Scanner(System.in);
+        int idStudente = scanner.nextInt();
+        readCorsi();
+        System.out.println("inserisci id corso: ");
+        int idCorso = scanner.nextInt();
+        CorsoDiscenteService oCorsoDiscenteService = new CorsoDiscenteService();
+        oCorsoDiscenteService.create(idStudente, idCorso);
+    }
+
     private static void delete () {
             System.out.println("Elimina il docente con id: ");
             Scanner scanner = new Scanner(System.in);
@@ -322,6 +343,18 @@ public class Main {
         CorsoService oCorsoService = new CorsoService();
         oCorsoService.delete(id);
 
+    }
+
+    private static void deleteCorsoDiscente(){
+        readDiscenti();
+        System.out.println("inserisci id studente che vuoi disiscrivere: ");
+        Scanner scanner = new Scanner(System.in);
+        int idStudente = scanner.nextInt();
+        readCorsiSeguiti(idStudente);
+        System.out.println("inserisci id corso: ");
+        int idCorso = scanner.nextInt();
+        CorsoDiscenteService oCorsoDiscenteService = new CorsoDiscenteService();
+        oCorsoDiscenteService.delete(idStudente, idCorso);
     }
 
     private static void update () {
@@ -383,5 +416,7 @@ public class Main {
         oCorsoService.update(id, nome, dataDiInizio, docenteId, durata);
 
     }
+
+
 
 }

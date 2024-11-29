@@ -1,6 +1,6 @@
 package model;
 import java.time.LocalDate;
-
+import java.util.HashMap;
 public class Discente {
 
     private String nome;
@@ -8,6 +8,7 @@ public class Discente {
     private int id;
     private String matricola;
     private LocalDate dataDiNascita;
+    private HashMap<Integer, Corso> corsiSeguiti;
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -40,4 +41,11 @@ public class Discente {
     public void setDataDiNascita(LocalDate data) {this.dataDiNascita = data;}
 
     public LocalDate getDataDiNascita() {return dataDiNascita; }
+
+    public HashMap<Integer, Corso> getCorsiSeguiti(){
+        return corsiSeguiti;
+    }
+    public void setCorsiSeguiti(HashMap<Integer, Corso>  corsiSeguiti){
+        this.corsiSeguiti = corsiSeguiti;
+    }
 }

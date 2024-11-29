@@ -1,9 +1,11 @@
 package service;
 
 import model.Discente;
+import model.Corso;
 import repository.DiscenteRepository;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 
 public class DiscenteService {
@@ -27,7 +29,9 @@ public class DiscenteService {
         return discenteRepository.readDiscente();
     }
 
-
+    public HashMap<Integer, Corso> readCorsiSeguiti(int id){
+        return discenteRepository.readCorsiSeguiti(id);
+    }
     public void delete(int id) {
         Discente oDiscente = new Discente();
         oDiscente.setid(id);
