@@ -2,11 +2,13 @@ package service;
 import java.time.LocalDate;
 import model.Corso;
 import model.Docente;
+import model.Discente;
 import repository.DiscenteRepository;
 import repository.DocenteRepository;
 import repository.CorsoRepository;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 
 public class CorsoService {
@@ -43,5 +45,8 @@ public class CorsoService {
         Corso oCorso = new Corso();
         oCorso.setId(id);
         corsoRepository.deleteCorso(oCorso);
+    }
+    public HashMap<Integer, Discente> readDiscentiDiUnCorso(int id){
+        return corsoRepository.readDiscentiDelCorso(id);
     }
 }

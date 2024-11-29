@@ -180,7 +180,8 @@ public class Main {
             System.out.println("1. Iscrivi uno studente a un corso");
             System.out.println("2. Disiscrivi uno studente da un corso");
             System.out.println("3. Visualizza la lista degli studenti di un corso");
-            System.out.println("4. Cambia il corso a cui è iscritto uno studente");
+            System.out.println("4. Visualizza la lista dei corsi di uno studente");
+            System.out.println("5. Cambia il corso a cui è iscritto uno studente");
             System.out.println("9. Exit");
             System.out.print("inserisci la tua scelta: ");
 
@@ -193,13 +194,15 @@ public class Main {
                 case 2:
                     deleteCorsoDiscente();
 
-
                     break;
                 case 3:
-
+                     readDiscentiDiUnCorsoScegliCorso();
                     break;
                 case 4:
-
+                    readCorsiSeguitiScegliStudente();
+                    break;
+                case 5:
+                    readCorsiSeguitiScegliStudente();
                     break;
                 case 9:
                     System.out.println("exiting");
@@ -250,6 +253,32 @@ public class Main {
        HashMap<Integer, Corso> corsiSeguiti = oDiscenteService.readCorsiSeguiti(id);
         for (Corso c : corsiSeguiti.values()) {
             System.out.println(c.getId()+ " "+ c.getNomeCorso());
+        }
+    }
+
+    private static void readCorsiSeguitiScegliStudente(){
+
+        readDiscenti();
+        System.out.println("Scegli studente");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        readCorsiSeguiti(id);
+    }
+
+    private static void readDiscentiDiUnCorsoScegliCorso(){
+
+        readCorsi();
+        System.out.println("Scegli un corso");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        readDiscentiDiUnCorso(id);
+    }
+
+    private static void readDiscentiDiUnCorso(int id){
+        CorsoService oCorsoService = new CorsoService();
+        HashMap<Integer, Discente> discentiDiUnCorso = oCorsoService.readDiscentiDiUnCorso(id);
+        for (Discente d : discentiDiUnCorso.values()) {
+            System.out.println(d.getid()+ " "+ d.getNome()+ " "+ d.getCognome());
         }
     }
 
@@ -372,7 +401,7 @@ public class Main {
 
     private static void updateDiscente () {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("inserisci l'id del docente da modificare:");
+        System.out.println("inserisci l'id del discente da modificare:");
         int id = scanner.nextInt();
         System.out.println("inserisci il nuovo nome:");
         String nome = scanner.next();

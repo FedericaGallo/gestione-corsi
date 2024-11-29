@@ -1,17 +1,19 @@
 package repository;
 
 import config.DbConnection;
+import model.Corso;
 import model.Docente;
-
+import model.Discente;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DocenteRepository {
     public void createDocente(Docente oDocente) {
 
         try {
             Connection c = DbConnection.openConnection();
-            System.out.println("Connessione riuscita!");
+            //System.out.println("Connessione riuscita!");
             Statement stmt = c.createStatement();
             stmt.execute("INSERT INTO DocenteTest VALUES('" + oDocente.getNome() + "','" + oDocente.getCognome() + "')");
         } catch (ClassNotFoundException | SQLException e) {
@@ -24,7 +26,7 @@ public Docente readDocenteByID(int id){
     Docente oDocente = new Docente();
         try {
             Connection c = DbConnection.openConnection();
-            System.out.println("Connessione riuscita!");
+            //System.out.println("Connessione riuscita!");
             Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM DocenteTest WHERE id = " + id);
             while (rs.next()) {
@@ -46,7 +48,7 @@ public Docente readDocenteByID(int id){
             ArrayList<Docente> listaDocenti = new ArrayList<>();
             try {
                 Connection c = DbConnection.openConnection();
-                System.out.println("Connessione riuscita!");
+                //System.out.println("Connessione riuscita!");
                 Statement stmt = c.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM DocenteTest ORDER BY id asc");
                 while (rs.next()) {
@@ -66,7 +68,7 @@ public Docente readDocenteByID(int id){
 
         try {
             Connection c = DbConnection.openConnection();
-            System.out.println("Connessione riuscita!");
+            //System.out.println("Connessione riuscita!");
             Statement stmt = c.createStatement();
             stmt.execute("DELETE FROM DocenteTest WHERE id = '" + oDocente.getid() + "'");
             System.out.println("model.dao.Docente eliminato");
@@ -80,7 +82,7 @@ public Docente readDocenteByID(int id){
 
         try {
             Connection c = DbConnection.openConnection();
-            System.out.println("Connessione riuscita!");
+            //System.out.println("Connessione riuscita!");
             Statement stmt = c.createStatement();
             stmt.execute("UPDATE DocenteTest SET nome='"+oDocente.getNome()+"', cognome='"+oDocente.getCognome()+"' WHERE id ="  + oDocente.getid());
             System.out.println("model.dao.Docente aggiornato");
@@ -89,13 +91,6 @@ public Docente readDocenteByID(int id){
             System.exit(0);
         }
     }
-
-
-
-
-
-
-
 
 }
 

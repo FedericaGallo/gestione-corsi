@@ -2,10 +2,12 @@ package repository;
 import java.time.LocalDate;
 import config.DbConnection;
 import model.Corso;
+import model.Discente;
 import model.Docente;
 import repository.DocenteRepository;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CorsoRepository {
 
@@ -76,5 +78,25 @@ public class CorsoRepository {
             System.err.println(e.getMessage());
             System.exit(0);
         }
+    }
+    public HashMap<Integer, Discente> readDiscentiDelCorso(int id) {
+        HashMap<Integer, Discente> listaDiscentiDelCorso = new HashMap<>();
+        try {
+            Connection c = DbConnection.openConnection();
+            //System.out.println("Connessione riuscita!");
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT cd.discente_id AS id, d.nome AS nome, d.cognome AS cognome FROM Corso_Discente cd JOIN DiscenteTest d ON cd.discente_id=d.id WHERE cd.corso_id= '" + id +"'"  );
+            while (rs.next()) {
+                Discente oDiscente = new Discente();
+                oDiscente.setNome(rs.getString("nome"));
+                oDiscente.setCognome(rs.getString("cognome"));
+                oDiscente.setid(rs.getInt("id"));
+                listaDiscentiDelCorso.put(oDiscente.getid(), oDiscente);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+        return listaDiscentiDelCorso;
     }
 }
