@@ -63,4 +63,18 @@ public class CorsoRepository {
             System.exit(0);
         }
     }
+
+    public void deleteCorso(Corso oCorso) {
+
+        try {
+            Connection c = DbConnection.openConnection();
+            System.out.println("Connessione riuscita!");
+            Statement stmt = c.createStatement();
+            stmt.execute("DELETE FROM CorsoTest WHERE id = '" + oCorso.getId() + "'");
+            System.out.println("model.dao.cORSO eliminato");
+        } catch (ClassNotFoundException | SQLException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+    }
 }

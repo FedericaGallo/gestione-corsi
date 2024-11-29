@@ -38,4 +38,10 @@ public class CorsoService {
         oCorso.setDocente(oDocente);
         corsoRepository.updateCorso(oCorso);
     }
+
+    public void delete(int id) {
+        Corso oCorso = new Corso();
+        oCorso.setId(id);
+        corsoRepository.deleteCorso(oCorso);
+    }
 }

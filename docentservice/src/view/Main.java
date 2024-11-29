@@ -150,7 +150,7 @@ public class Main {
                     readCorsi();
                     break;
                 case 4:
-
+                    deleteCorso();
                     break;
                 case 9:
                     System.out.println("exiting");
@@ -192,7 +192,7 @@ public class Main {
         List<Corso> listaCorsi= oCorsoService.readCorso();
         int i = 0;
         while(i<listaCorsi.size()){
-            System.out.println(listaCorsi.get(i).getNomeCorso()+" "+ listaCorsi.get(i).getDataInizio()+" "+listaCorsi.get(i).getDurata()+" "+listaCorsi.get(i).getDocenteNome()+" "+listaCorsi.get(i).getDocenteCognome());
+            System.out.println(listaCorsi.get(i).getId()+" "+listaCorsi.get(i).getNomeCorso()+" "+ listaCorsi.get(i).getDataInizio()+" "+listaCorsi.get(i).getDurata()+" "+listaCorsi.get(i).getDocenteNome()+" "+listaCorsi.get(i).getDocenteCognome());
             i++;}
 
     }
@@ -268,6 +268,16 @@ public class Main {
 
     }
 
+    private static void deleteCorso () {
+        readCorsi();
+        System.out.println("Elimina il corso con id: ");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        CorsoService oCorsoService = new CorsoService();
+        oCorsoService.delete(id);
+
+    }
+
         private static void update () {
             Scanner scanner = new Scanner(System.in);
             System.out.println("inserisci l'id del docente da modificare:");
@@ -312,7 +322,6 @@ public class Main {
         String nome = scanner.next();
         System.out.println("inserisci la nuova durata del corso:");
         String durata = scanner.next();
-        scanner.nextLine();
         System.out.println("Inserisci il nuovo giorno di inizio del corso: ");
         int giorno = scanner.nextInt();
         System.out.println("Inserisci il nuovo mese di inizio del corso: ");
