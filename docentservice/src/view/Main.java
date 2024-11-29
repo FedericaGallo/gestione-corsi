@@ -119,7 +119,6 @@ public class Main {
         scanner.close();
 
     }
-
     private static void gestisciCorso(){
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -143,13 +142,15 @@ public class Main {
                     createCorso();
                     break;
                 case 2:
-                    updateDiscente();
+
+                    updateCorso();
+
                     break;
                 case 3:
-                    readDiscenti();
+                    readCorsi();
                     break;
                 case 4:
-                    deleteDiscente();
+
                     break;
                 case 9:
                     System.out.println("exiting");
@@ -181,6 +182,17 @@ public class Main {
         int i = 0;
         while(i<listaDiscenti.size()){
             System.out.println(listaDiscenti.get(i).getid()+" "+ listaDiscenti.get(i).getCognome()+" "+listaDiscenti.get(i).getNome());
+            i++;}
+
+    }
+
+    private static void readCorsi() {
+        System.out.println("ecco la lista dei corsi: ");
+        CorsoService oCorsoService = new CorsoService();
+        List<Corso> listaCorsi= oCorsoService.readCorso();
+        int i = 0;
+        while(i<listaCorsi.size()){
+            System.out.println(listaCorsi.get(i).getNomeCorso()+" "+ listaCorsi.get(i).getDataInizio()+" "+listaCorsi.get(i).getDurata()+" "+listaCorsi.get(i).getDocenteNome()+" "+listaCorsi.get(i).getDocenteCognome());
             i++;}
 
     }
@@ -288,6 +300,31 @@ public class Main {
         LocalDate dataDiNascita = LocalDate.of(anno, mese, giorno);
         DiscenteService oDiscenteService = new DiscenteService();
         oDiscenteService.update(id, nome, cognome, matricola, dataDiNascita);
+
+    }
+    private static void updateCorso () {
+        Scanner scanner = new Scanner(System.in);
+        readCorsi();
+        System.out.println("inserisci l'id del corso da modificare:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("inserisci il nuovo nome del corso:");
+        String nome = scanner.next();
+        System.out.println("inserisci la nuova durata del corso:");
+        String durata = scanner.next();
+        scanner.nextLine();
+        System.out.println("Inserisci il nuovo giorno di inizio del corso: ");
+        int giorno = scanner.nextInt();
+        System.out.println("Inserisci il nuovo mese di inizio del corso: ");
+        int mese = scanner.nextInt();
+        System.out.println("Inserisci il nuovo anno di inizio del corso: ");
+        int anno = scanner.nextInt();
+        read();
+        System.out.println("Inserisci l'id del nuovo docente: ");
+        int docenteId= scanner.nextInt();
+        LocalDate dataDiInizio = LocalDate.of(anno, mese, giorno);
+        CorsoService oCorsoService = new CorsoService();
+        oCorsoService.update(id, nome, dataDiInizio, docenteId, durata);
 
     }
 

@@ -7,6 +7,7 @@ public class Corso {
     private LocalDate dataInizio;
     private String durata;
     private Docente docente;
+
     private int id;
 
     public void setNomeCorso(String nomeCorso){
@@ -37,6 +38,22 @@ public class Corso {
     }
     public int getDocenteId(){
         return docente.getid();
+    }
+
+    public void setDocenteId(int id){
+        this.docente.setid(id);
+    }
+    public void setDocenteNome(String nome){
+        this.docente.setNome(nome);
+    }
+    public void setDocenteCognome(String cognome){
+        this.docente.setCognome(cognome);
+    }
+    public String getDocenteCognome(){
+        return docente.getCognome();
+    }
+    public String getDocenteNome(){
+        return docente.getNome();
     }
     public int getId(){
         return id;

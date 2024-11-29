@@ -1,5 +1,5 @@
 package service;
-
+import java.time.LocalDate;
 import model.Corso;
 import model.Docente;
 import repository.DiscenteRepository;
@@ -7,6 +7,7 @@ import repository.DocenteRepository;
 import repository.CorsoRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class CorsoService {
     Docente oDocente = new Docente();
@@ -21,5 +22,20 @@ public class CorsoService {
         oDocente =docenteRepository.readDocenteByID(docenteId);
         oCorso.setDocente(oDocente);
         corsoRepository.createCorso(oCorso);
+    }
+
+    public List<Corso> readCorso(){
+        return corsoRepository.readCorso();
+    }
+
+    public void update(int id, String nomeCorso, LocalDate dataDiInizio, int docenteId, String  durata) {
+        Corso oCorso = new Corso();
+        oCorso.setNomeCorso(nomeCorso);
+        oCorso.setDataInizio(dataDiInizio);
+        oCorso.setDurata(durata);
+        oCorso.setId(id);
+        oDocente =docenteRepository.readDocenteByID(docenteId);
+        oCorso.setDocente(oDocente);
+        corsoRepository.updateCorso(oCorso);
     }
 }

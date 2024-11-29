@@ -1,10 +1,11 @@
 package model;
-
+import java.util.ArrayList;
 public class Docente {
 
     private String nome;
     private String cognome;
     private int id;
+    private ArrayList<Corso> corsi;
 
     public void setNome(String nome) {
         this.nome = nome;
