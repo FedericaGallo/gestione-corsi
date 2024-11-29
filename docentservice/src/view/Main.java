@@ -19,6 +19,7 @@ public class Main {
         System.out.println("1. Per gestire docenti");
         System.out.println("2. Per gestire discenti");
         System.out.println("3. Per gestire corsi");
+        System.out.println("4. Per gestire corsi_discenti ");
         choiceEntity = scanner.nextInt();
 
         switch (choiceEntity){
@@ -30,6 +31,9 @@ public class Main {
                 break;
             case 3:
                 gestisciCorso();
+                break;
+            case 4:
+                gestisciCorsoDiscente();
                 break;
 
         }
@@ -163,6 +167,49 @@ public class Main {
         scanner.close();
 
     }
+    private static void gestisciCorsoDiscente(){
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+
+            System.out.println("Classe CorsoDiscente");
+
+            System.out.println("***Menu***");
+            System.out.println("1. Iscrivi uno studente a un corso");
+            System.out.println("2. Disiscrivi uno studente da un corso");
+            System.out.println("3. Visualizza la lista degli studenti di un corso");
+            System.out.println("4. Cambia il corso a cui è iscritto uno studente");
+            System.out.println("9. Exit");
+            System.out.print("inserisci la tua scelta: ");
+
+            // Read user input
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    createCorso();
+                    break;
+                case 2:
+
+                    updateCorso();
+
+                    break;
+                case 3:
+                    readCorsi();
+                    break;
+                case 4:
+                    deleteCorso();
+                    break;
+                case 9:
+                    System.out.println("exiting");
+                    break;
+                default:
+                    System.out.println("scelta errata. scegliere un numero da 1 a 8");
+            }
+
+        } while (choice != 9);
+        scanner.close();
+    }
 
     private static void read() {
         System.out.println("ecco la lista dei docenti: ");
@@ -197,8 +244,7 @@ public class Main {
 
     }
 
-
-        private static void create () {
+    private static void create () {
             System.out.println("inserisci nome: ");
             Scanner scanner = new Scanner(System.in);
             String nome = scanner.next();
@@ -250,7 +296,7 @@ public class Main {
 
     }
 
-        private static void delete () {
+    private static void delete () {
             System.out.println("Elimina il docente con id: ");
             Scanner scanner = new Scanner(System.in);
             int id = scanner.nextInt();
@@ -278,7 +324,7 @@ public class Main {
 
     }
 
-        private static void update () {
+    private static void update () {
             Scanner scanner = new Scanner(System.in);
             System.out.println("inserisci l'id del docente da modificare:");
             int id = scanner.nextInt();
@@ -312,6 +358,7 @@ public class Main {
         oDiscenteService.update(id, nome, cognome, matricola, dataDiNascita);
 
     }
+
     private static void updateCorso () {
         Scanner scanner = new Scanner(System.in);
         readCorsi();

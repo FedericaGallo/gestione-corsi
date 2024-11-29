@@ -1,12 +1,15 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Corso {
     private String nomeCorso;
     private LocalDate dataInizio;
     private String durata;
     private Docente docente;
+
 
     private int id;
 
@@ -26,6 +29,7 @@ public class Corso {
     public void setId(int id){
         this.id = id;
     }
+
     public String getNomeCorso(){
         return nomeCorso;
     }
