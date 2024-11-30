@@ -17,10 +17,10 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         int choiceEntity;
-        System.out.println("1. Per gestire docenti");
-        System.out.println("2. Per gestire discenti");
-        System.out.println("3. Per gestire corsi");
-        System.out.println("4. Per gestire gli iscritti a i corsi ");
+        System.out.println("1. Per gestire i docenti");
+        System.out.println("2. Per gestire i discenti");
+        System.out.println("3. Per gestire i corsi");
+        System.out.println("4. Per gestire gli iscritti ai corsi ");
         choiceEntity = scanner.nextInt();
 
         switch (choiceEntity){
@@ -181,7 +181,6 @@ public class Main {
             System.out.println("2. Disiscrivi uno studente da un corso");
             System.out.println("3. Visualizza la lista degli studenti di un corso");
             System.out.println("4. Visualizza la lista dei corsi di uno studente");
-            System.out.println("5. Cambia il corso a cui è iscritto uno studente");
             System.out.println("9. Exit");
             System.out.print("inserisci la tua scelta: ");
 
@@ -199,9 +198,6 @@ public class Main {
                      readDiscentiDiUnCorsoScegliCorso();
                     break;
                 case 4:
-                    readCorsiSeguitiScegliStudente();
-                    break;
-                case 5:
                     readCorsiSeguitiScegliStudente();
                     break;
                 case 9:
@@ -347,6 +343,7 @@ public class Main {
     }
 
     private static void delete () {
+            read();
             System.out.println("Elimina il docente con id: ");
             Scanner scanner = new Scanner(System.in);
             int id = scanner.nextInt();
@@ -387,6 +384,7 @@ public class Main {
     }
 
     private static void update () {
+            read();
             Scanner scanner = new Scanner(System.in);
             System.out.println("inserisci l'id del docente da modificare:");
             int id = scanner.nextInt();
