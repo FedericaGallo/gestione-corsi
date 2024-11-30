@@ -17,6 +17,9 @@ public class Discente {
     public String getNome() {
         return nome;
     }
+    public String prova(){
+        return "prova";
+    }
 
     public void setCognome(String cognome) {
         this.cognome = cognome;

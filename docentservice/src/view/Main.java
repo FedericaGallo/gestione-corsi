@@ -55,7 +55,7 @@ public class Main {
             System.out.println("4. Elimina un discente");
             System.out.println("9. Exit");
             System.out.print("inserisci la tua scelta: ");
-            System.out.print("test commit push");
+            //System.out.print("test commit push");
             // Read user input
             choice = scanner.nextInt();
             switch (choice) {
@@ -353,6 +353,7 @@ public class Main {
         }
 
     private static void deleteDiscente () {
+        readDiscenti();
         System.out.println("Elimina il discente con id: ");
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
@@ -398,6 +399,7 @@ public class Main {
         }
 
     private static void updateDiscente () {
+        readDiscenti();
         Scanner scanner = new Scanner(System.in);
         System.out.println("inserisci l'id del discente da modificare:");
         int id = scanner.nextInt();
